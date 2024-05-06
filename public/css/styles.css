@@ -1,0 +1,165 @@
+/* Resetting default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f8f8f8;
+}
+
+/* Header styles */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 36px; /* Reduced font size */
+  margin-bottom: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Main styles */
+main {
+  padding: 20px;
+}
+
+/* Search section styles */
+#search {
+  margin-bottom: 20px;
+}
+
+#searchForm {
+  display: flex;
+}
+
+#searchKeyword {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+}
+
+#searchButton {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+/* Listings section styles */
+#listings {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 35px;
+  justify-content: space-around;
+}
+/* #listings {
+  display: flex;
+  font-size: 0;
+  flex-wrap: wrap;
+  margin: -10px 0 0 -10px;
+} */
+.listing {
+  display: inline-block;
+
+  margin: 10px 0 0 10px;
+  flex-grow: 1;
+  height: 100px;
+}
+
+a {
+  text-decoration: none;
+}
+.listing img {
+  width: 100%;
+  height: 150px;
+}
+.listing h3 {
+  color: black;
+}
+.listing p {
+  color: #333;
+}
+.listing button {
+  padding: 7px 19px;
+  margin-top: 10px;
+  border: 1px solid black;
+  background-color: black;
+  color: white;
+  font-weight: 300;
+  border-radius: 7px;
+  font-size: 15px;
+  transition: transform 1.5s ease-in-out, background-color 0.5s;
+}
+.listing button:hover {
+  background-color: rgba(255, 77, 77, 0.708);
+  border: 1px solid red;
+}
+.listing:hover {
+  transform: scaleX(1.03);
+}
+
+/* Logo styles */
+.logo {
+  float: left;
+  margin-right: 10px;
+}
+
+.logo img {
+  width: 60px; /* Adjusted size */
+  height: auto;
+  vertical-align: middle;
+}
+/* Footer styles */
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px; /* Add some space between the content and footer */
+}
+
+.profile-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-container i {
+  margin-right: 5px;
+}

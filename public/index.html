@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Barter- Bartering System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="logo">
+        </div>
+        <h1>We Barter-Bartering for Everyone</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html" id="homeLink"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#" id="messagesLink"><i class="fas fa-envelope"></i> Messages</a></li>
+                <li><a href="#" id="profileLink"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="registration.html" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Login</a></li>
+            </ul>
+        </nav>
+        <img src="images/hero.jpg" alt="Hero Image" style="width: 100%; height: auto;">
+
+    </header>
+    <div class="profile-container">
+        <i class="fas fa-user"></i>
+        <span>Welcome, <span id="loggedInUser"></span></span>
+    </div>
+    <main>
+        <section id="search">
+            <h2>Search Listings</h2>
+            <form action="#" method="GET" id="searchForm" onsubmit="event.preventDefault(); SearchFeature();">
+                <input type="text" name="keyword" id="searchKeyword" placeholder="Search..." onclick="SearchFeature()">
+                <button type="submit" id="searchButton">Search</button>
+            </form>
+
+        </section>
+
+        <h2>Recent Listings</h2>
+        <section id="listings">
+            <!-- Listings will be dynamically generated here -->
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 We Barter - Bartering for Everyone</p>
+    </footer>
+    <script>
+        // Get the username from local storage or wherever it's stored after login/registration
+        const username = localStorage.getItem('username');
+        const searchKeyword = document.getElementById('searchKeyword')
+        // Check if the username is available
+        if (username) {
+            // Set the username in the profile container
+            document.getElementById('loggedInUser').textContent = username;
+        }
+
+        // Sample data for listings (you can replace this with your actual data)
+        const listingsData = [
+            { id: 1, image: 'images/item1.png', title: 'Bicycle', price: '$70', description: `FITTOO Xnice 27.5'' Unisex Mountain Bike - 27 Speed - Aluminum Frame - Lightweight - 4 Colour Option \n \nA sturdy bicycle for everyday use. This bicycle is in good condition and has been well-maintained. It features a comfortable seat, durable tires, and smooth gears, making it perfect for commuting or leisure rides.` },
+            { id: 2, image: 'images/item2.png', title: 'Boat', price: '$10000', description: 'A small boat suitable for fishing. This boat is equipped with a reliable engine and comes with fishing rod holders. It has a comfortable seating area and ample storage space for fishing gear.' },
+            { id: 3, image: 'images/item3.jpg', title: 'Pram', price: '$100', description: 'A comfortable pram for your baby. This pram is lightweight and easy to maneuver. It has a reclining seat and adjustable canopy to protect your baby from the sun. The pram also has a large storage basket for your convenience.' },
+            { id: 4, image: 'images/item4.jpg', title: 'Antiques', price: '$100', description: 'A collection of antique items. This collection includes various antique pieces such as furniture, pottery, and decorative items. Each piece has been carefully selected and is in excellent condition, adding a touch of history and elegance to your home.' },
+            { id: 5, image: 'images/item5.jpg', title: 'Car', price: '$2000', description: 'A reliable car for daily commute. This car is fuel-efficient and has low mileage. It is equipped with modern features such as air conditioning, power windows, and a CD player. The car has been regularly serviced and is in great condition.' },
+            { id: 6, image: 'images/item6.png', title: 'Bike', price: '$500', description: 'A mountain bike for off-road adventures. This bike has front suspension and knobby tires for tackling rough terrain. It has a lightweight frame and responsive brakes, making it ideal for trail riding. The bike is in excellent condition and ready for your next adventure.' },
+            { id: 7, image: 'images/item7.jpg', title: 'Table', price: '$50', description: 'A sturdy table for home or office use. This table is made of solid wood and has a durable construction. It has a spacious tabletop and stable legs, making it suitable for various uses. The table is in good condition and will complement any decor.' },
+            { id: 8, image: 'images/item8.jpg', title: 'Painting', price: '$150', description: 'A beautiful painting for your wall. This painting is an original artwork by a local artist. It features vibrant colors and intricate details, adding a pop of color and creativity to your home. The painting is in a decorative frame and ready to hang.' },
+
+        ];
+
+        function SearchFeature() {
+            const searchKeyword = document.getElementById('searchKeyword').value.toLowerCase();
+
+            // Filter the listingsData array based on the searchKeyword
+            const filteredListings = listingsData.filter(listing =>
+                listing.title.toLowerCase().includes(searchKeyword) ||
+                listing.description.toLowerCase().includes(searchKeyword)
+            );
+
+            // Clear the current listings
+            listingsContainer.innerHTML = '';
+
+            // Generate HTML for each filtered listing and append to the listingsContainer
+            filteredListings.forEach(listing => {
+                listingsContainer.innerHTML += generateListingHTML(listing);
+            });
+        }
+
+
+        // Function to generate HTML for each listing
+        function generateListingHTML(listing) {
+            return `
+            
+            <a href="/product.html?data=${encodeURIComponent(JSON.stringify(listing))}" id="myLink" >
+
+                <div class="listing" >
+                    <img src="${listing.image}" alt="${listing.title}">
+                    <h3>${listing.title}</h3>
+                    <p>${listing.price}</p>
+                    <button class="contactSeller" onclick="showProductInfo('${listing.title}')">Contact Seller</button>
+                </div>
+            </a>
+            `;
+        }
+
+        // Get the listings container
+        const listingsContainer = document.getElementById('listings');
+
+        // Generate HTML for each listing and append to the listings container
+        listingsData.forEach(listing => {
+            listingsContainer.innerHTML += generateListingHTML(listing);
+        });
+
+        // Function to show product information modal
+        function showProductInfo(productName, productImage, productDescription, productPrice) {
+            // Get the elements to display product information
+            const productNameElement = document.getElementById('productName');
+            const productImageElement = document.getElementById('productImage');
+            const productDescriptionElement = document.getElementById('productDescription');
+            const productPriceElement = document.getElementById('productPrice');
+
+            // Set the product information
+            productNameElement.textContent = productName;
+            productImageElement.src = productImage;
+            productDescriptionElement.textContent = productDescription;
+            productPriceElement.textContent = productPrice;
+
+            // Show the modal or container with product information
+            document.getElementById('productInfoContainer').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
